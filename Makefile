@@ -1,21 +1,20 @@
-NAME			= libftprintf.a
+NAME			= prog.a
 
 SRCS_LIST		= \
-					ft_printf.c 	\
-					parse_args.c 	\
-					aff_u.c 		\
-					conv.c			\
-					putall.c		\
+					main.c 	\
+					init_map.c 	\
+					check_piece.c \
+					make_map.c
+
 
 
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
 OBJS			= ${SRCS:.c=.o}
 
-HEADER			= includes
-FOLDER			= sources
+HEADER			= include
+FOLDER			= source
 
-LIBFT 			= ../libft
 
 CC				= gcc
 CFLAGS 			= -Wall -Wextra -Werror
@@ -24,8 +23,6 @@ RM				= rm -f
 all:			${NAME}
 
 $(NAME):		${OBJS}
-				@make -C $(LIBFT)
-				@cp ../libft/libft.a ./$(NAME)
 				@ar -rcs ${NAME} ${OBJS}
 
 bonus:			${NAME}

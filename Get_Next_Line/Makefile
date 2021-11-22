@@ -1,21 +1,16 @@
-NAME			= libftprintf.a
+NAME			= GNL.a
 
 SRCS_LIST		= \
-					ft_printf.c 	\
-					parse_args.c 	\
-					aff_u.c 		\
-					conv.c			\
-					putall.c		\
+					get_next_line_utils.c 	\
+					get_next_line.c 		\
+
 
 
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
 OBJS			= ${SRCS:.c=.o}
 
-HEADER			= includes
-FOLDER			= sources
-
-LIBFT 			= ../libft
+FOLDER			= ./
 
 CC				= gcc
 CFLAGS 			= -Wall -Wextra -Werror
@@ -24,14 +19,12 @@ RM				= rm -f
 all:			${NAME}
 
 $(NAME):		${OBJS}
-				@make -C $(LIBFT)
-				@cp ../libft/libft.a ./$(NAME)
 				@ar -rcs ${NAME} ${OBJS}
 
 bonus:			${NAME}
 
 %.o: %.c
-				@${CC} ${CFLAGS} -I ${HEADER} -o $@ -c $<
+				@${CC} ${CFLAGS} -o $@ -c $<
 
 clean:
 				@${RM} ${OBJS}
