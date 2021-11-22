@@ -4,4 +4,4 @@ make -C ../minilibx
 make -C ../Get_Next_Line
 make -C ../
 gcc ../prog.a ../Get_Next_Line/GNL.a ../ft_printf/libftprintf.a ../libft/libft.a -L ../minilibx -lmlx -framework OpenGL -framework AppKit
-../a.out
+./a.out

@@ -25,3 +25,4 @@ int check_piece_here(char c);
 void put_image(mlx_t mlx_st, char *imgPath, int x, int y);
 void exit_func(void* params);
 int put_sprite(mlx_t mlx_st, char c, char* path);
+int check_all_piece();
