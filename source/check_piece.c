@@ -8,7 +8,6 @@ int check_piece_here(char c)
 
     line = "";
     piece = 0;
-    piece = 0;
     fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
     while (line)
     {
