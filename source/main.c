@@ -26,7 +26,7 @@ int exit_cross(int keycode, void* params)
 	(void)keycode;
 	(void)params;
     exit(0);
-    return (0); 
+    return (0);
 }
 int key_listen(int keycode, void* params)
 {
@@ -48,23 +48,22 @@ void refresh_map(mlx_t *mlx_st)
 {
 	char *number;
 	char *string;
+
 	put_sprite(mlx_st, '0', "../sprite/sand.xpm", mlx_st->map_b);
     put_sprite(mlx_st, '1', "../sprite/wall.xpm", mlx_st->map_b);
     put_sprite(mlx_st, 'C', "../sprite/item.xpm", mlx_st->map_b);
     put_sprite(mlx_st, 'E', "../sprite/door.xpm", mlx_st->map_b);
     put_sprite(mlx_st, 'P', "../sprite/player.xpm", mlx_st->map_b);
+	number = ft_itoa(mlx_st->player->count_move);
+	string = ft_strjoin("MOVES COUNT : ", number);
 	if (mlx_st->player->count_move > 1)
 	{
-		number = ft_itoa(mlx_st->player->count_move);
-		string = ft_strjoin("MOVES COUNT : ", number);
 		mlx_string_put(mlx_st->mlx, mlx_st->window, 20, 20, 0x52e710, string);
 		free(number);
 		free(string);
 	}
 	else
 	{
-		number = ft_itoa(mlx_st->player->count_move);
-		string = ft_strjoin("MOVE COUNT : ", number);
 		mlx_string_put(mlx_st->mlx, mlx_st->window, 20, 20, 0x52e710, string);
 		free(number);
 		free(string);
