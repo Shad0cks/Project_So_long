@@ -24,10 +24,7 @@ void exit_func(void* params)
 int exit_cross(int keycode, void* params)
 {
 	(void)keycode;
-	mlx_t *mlx_st;
-    mlx_st = (mlx_t *)params;
-    mlx_destroy_window(mlx_st->mlx, mlx_st->window);
-	free_map(mlx_st->map_b);
+	(void)params;
     exit(0);
     return (0); 
 }
