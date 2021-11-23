@@ -4,7 +4,9 @@ SRCS_LIST		= \
 					main.c 	\
 					init_map.c 	\
 					check_piece.c \
-					make_map.c
+					make_map.c \
+					init_player.c \
+					player_move.c
 
 
 

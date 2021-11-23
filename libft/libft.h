@@ -13,10 +13,25 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+typedef struct item_s
+{
+    int index;
+    void *sprite; 
+} item_t;
+
+
+typedef struct items_s items_t;
+struct items_s
+{
+    item_t *item;
+    items_t *next; 
+};
 
 typedef struct s_list
 {

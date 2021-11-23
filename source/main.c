@@ -19,12 +19,19 @@ int key_listen(int keycode, void* params)
     //ft_printf("keycode : %d\n", keycode);
     if (keycode == 53)
         exit_func(params);
+    if (keycode == 6)
+        go_up(params);
     return (0);
 }
 
 int main(void)
 {
     map_t map;
+    items_t items;
+    items.item = NULL;
+    items.next = NULL;
+    player_t player;
+    init_player_struct(&player);
     map.max_x = -1;
     map.max_y = -1;
     if(!check_all_piece())
@@ -43,21 +50,22 @@ int main(void)
         exit(-1);
     }
     mlx_t mlx_st;
+    mlx_st.player = &player;
+    mlx_st.items = &items;
     mlx_st.mlx = mlx_init();
     if (mlx_st.mlx == NULL)
         exit(-1);
     mlx_st.window = mlx_new_window(mlx_st.mlx, map.max_x * 40, map.max_y * 40, "So_long");
 
     //creating image and put it-----------------------
-    put_sprite(mlx_st, '0', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/sand.xpm");
-    put_sprite(mlx_st, '1', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/wall.xpm");
-    put_sprite(mlx_st, 'C', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/item.xpm");
-    put_sprite(mlx_st, 'E', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/door.xpm");
-    put_sprite(mlx_st, 'P', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/player.xpm");
+    put_sprite(&mlx_st, '0', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/sand.xpm");
+    put_sprite(&mlx_st, '1', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/wall.xpm");
+    put_sprite(&mlx_st, 'C', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/item.xpm");
+    put_sprite(&mlx_st, 'E', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/door.xpm");
+    put_sprite(&mlx_st, 'P', "/Users/pierre-louis/Documents/C/Project_So_long/sprite/player.xpm");
 
-
+    ft_printf("player %p\n", mlx_st.player->player_sprite);
     //--------------------
-
     mlx_key_hook(mlx_st.window, key_listen, &mlx_st);
     mlx_hook(mlx_st.window, 17, (1L<<19), exit_cross, NULL);
     mlx_loop(mlx_st.mlx); 

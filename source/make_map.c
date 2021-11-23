@@ -1,6 +1,16 @@
 #include "../include/header.h"
 
-void put_image(mlx_t mlx_st, char *imgPath, int x, int y)
+void save_sprite(mlx_t *mlx_st, char c, void *sprite)
+{
+    if (c == 'P')
+        mlx_st->player->player_sprite = sprite;
+    else if(c == 'C')
+    {
+
+    }
+}
+
+void *put_image(mlx_t mlx_st, char *imgPath, int x, int y)
 {
     void	*img;
     int width = 40;
@@ -15,9 +25,10 @@ void put_image(mlx_t mlx_st, char *imgPath, int x, int y)
         exit_func(&mlx_st);
     }
     mlx_put_image_to_window(mlx_st.mlx, mlx_st.window, img, x, y);
+    return (img);
 }
 
-int put_sprite(mlx_t mlx_st, char c, char* path)
+int put_sprite(mlx_t *mlx_st, char c, char* path)
 {
     char* line;
     int fd;
@@ -36,7 +47,9 @@ int put_sprite(mlx_t mlx_st, char c, char* path)
         while (line && line[i] != '\0')
         {
             if (line[i] == c || (c == '0' && line[i] != '1'))
-                put_image(mlx_st, path, x, y);
+                save_sprite(mlx_st, c, put_image(*mlx_st, path, x, y));
+            if (c == 'P' && line[i] == 'P')
+                ft_printf("player x : %d / y : %d\n", x, y);
             x += 40;
             i++;
         }
