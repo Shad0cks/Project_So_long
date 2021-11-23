@@ -9,47 +9,38 @@ int strcount(char *str)
         i++;
     return (i);
 }
-int valid_map()
+int valid_map(char **buffer)
 {
-    char* line;
-    int fd;
     int count;
+	int y;
 
-    line = "";
+	y = 0;
     count = 0;
-    fd = open("../map.ber", O_RDONLY);
-    while (line)
+    while (buffer[y] != NULL)
     {
-        line = get_next_line(fd);
-        if(line)
-            count++;
-        free(line);
+        count++;
+		y++;
     }
-	close(fd);
     return (count);
 }
 
-int calc_map_size(map_t *map)
+int calc_map_size(char **buffer, map_t *map)
 {
-    char* line;
-    int fd;
     int count;
+	int y;
 
-    line = "";
+	y = 0;
     count = 0;
-    fd = open("../map.ber", O_RDONLY);
-    while (line)
+    while (buffer[y] != NULL)
     {
-        line = get_next_line(fd);
-        if (line && strcount(line) != map->max_x && map->max_x != -1)
+        if (strcount(buffer[y]) != map->max_x && map->max_x != -1)
             return (-1);
         if (map->max_x == -1)
-            map->max_x = strcount(line);
-        free(line);
+            map->max_x = strcount(buffer[y]);
         count++;
+		y++;
     }
-	close(fd);
-    map->max_y = count - 1;
+    map->max_y = count;
     if (map->max_x == map->max_y)
         return (-1);
     return (0);
@@ -69,25 +60,19 @@ static int check_full_wall(char* str)
     return (0);
 }
 
-int check_close(map_t *map)
+int check_close(char **buffer, map_t *map)
 {
-    char* line;
-    int fd;
-    int count;
+	int y;
 
-    line = "";
-    count = 0;
-    fd = open("../map.ber", O_RDONLY);
-    while (line)
+	y = 0;
+    while (buffer[y] != NULL)
     {
-        count++;
-        line = get_next_line(fd);
-        if (count == 1 || count == map->max_y)
-            if (check_full_wall(line) == -1)
-                return (-1);
-        if (line && (line[0] != '1' || line[map->max_x - 1] != '1'))
+        if (y == 0 || y == map->max_y)
+            if (check_full_wall(buffer[y]) == -1)
+				return (-1);
+		if ((buffer[y][0] != '1' || buffer[y][map->max_x - 1] != '1'))
             return (-1);
-        free(line);
-    }
+		y++;
+	}
     return (0);
 }

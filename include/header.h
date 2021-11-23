@@ -31,14 +31,14 @@ typedef struct mlx_s
     items_t *items;
 } mlx_t;
 
-int calc_map_size(map_t *map);
-int check_close(map_t *map);
-int valid_map();
-int check_piece_here(char c);
+int calc_map_size(char **buffer, map_t *map);
+int check_close(char **buffer, map_t *map);
+int valid_map(char **buffer);
+int check_piece_here(char **buffer, char c);
 void *put_image(mlx_t *mlx_st, char *imgPath, int x, int y);
 void exit_func(void* params);
 int put_sprite(mlx_t *mlx_st, char c, char* path, char **buffer);
-int check_all_piece();
+int check_all_piece(char **buffer);
 void init_player_struct(player_t *player);
 char **put_buffer();
 void refresh_map(mlx_t *mlx_st);

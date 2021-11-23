@@ -1,47 +1,36 @@
 #include "../include/header.h"
 
-int check_piece_here(char c)
+int check_piece_here(char **buffer, char c)
 {
-    char* line;
-    int fd;
-    int piece;
+	int y;
 
-    line = "";
-    piece = 0;
-    fd = open("../map.ber", O_RDONLY);
-    while (line)
+	y = 0;
+    while (buffer[y] != NULL)
     {
-        line = get_next_line(fd);
-        if(line)
-            if(ft_strchr(line, c))
-                return (1);
-        free(line);
+        if(ft_strchr(buffer[y], c))
+            return (1);
+		y++;
     }
-	close(fd);
     return (0);
 }
 
-int check_all_piece()
+int check_all_piece(char **buffer)
 {
-    char* line;
-    int fd;
     int i;
+	int y;
 
-    line = "";
-    fd = open("../map.ber", O_RDONLY);
-    while (line)
+	y = 0;
+    while (buffer[y] != NULL)
     {
-        line = get_next_line(fd);
         i = 0;
-        while(line && line[i] != '\0')
+        while(buffer[y][i] != '\0')
         {
-            if (line[i] != '1' && line[i] != '0' && line[i] != 'P' 
-                        && line[i] != 'C' && line[i] != 'E' && line[i] != 10)
+            if (buffer[y][i] != '1' && buffer[y][i] != '0' && buffer[y][i] != 'P' 
+                        && buffer[y][i] != 'C' && buffer[y][i] != 'E' && buffer[y][i] != 10)
                 return (0);
             i++;
         }
-        free(line);
+        y++;
     }
-	close(fd);
     return (1);
 }
