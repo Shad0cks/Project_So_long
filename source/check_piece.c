@@ -8,7 +8,7 @@ int check_piece_here(char c)
 
     line = "";
     piece = 0;
-    fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
+    fd = open("../map.ber", O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -17,6 +17,7 @@ int check_piece_here(char c)
                 return (1);
         free(line);
     }
+	close(fd);
     return (0);
 }
 
@@ -27,7 +28,7 @@ int check_all_piece()
     int i;
 
     line = "";
-    fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
+    fd = open("../map.ber", O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -41,5 +42,6 @@ int check_all_piece()
         }
         free(line);
     }
+	close(fd);
     return (1);
 }

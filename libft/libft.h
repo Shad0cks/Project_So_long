@@ -6,7 +6,7 @@
 /*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:03:16 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/11/05 16:51:56 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:09:47 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,11 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct item_s
-{
-    int index;
-    void *sprite; 
-} item_t;
-
-
 typedef struct items_s items_t;
 struct items_s
 {
-    item_t *item;
+    int index;
+    void *sprite; 
     items_t *next; 
 };
 

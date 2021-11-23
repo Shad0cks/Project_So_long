@@ -17,7 +17,7 @@ int valid_map()
 
     line = "";
     count = 0;
-    fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
+    fd = open("../map.ber", O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -25,6 +25,7 @@ int valid_map()
             count++;
         free(line);
     }
+	close(fd);
     return (count);
 }
 
@@ -36,7 +37,7 @@ int calc_map_size(map_t *map)
 
     line = "";
     count = 0;
-    fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
+    fd = open("../map.ber", O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -47,6 +48,7 @@ int calc_map_size(map_t *map)
         free(line);
         count++;
     }
+	close(fd);
     map->max_y = count - 1;
     if (map->max_x == map->max_y)
         return (-1);
@@ -75,7 +77,7 @@ int check_close(map_t *map)
 
     line = "";
     count = 0;
-    fd = open("/Users/pierre-louis/Documents/C/Project_So_long/map.ber", O_RDONLY);
+    fd = open("../map.ber", O_RDONLY);
     while (line)
     {
         count++;
