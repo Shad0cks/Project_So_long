@@ -5,8 +5,8 @@ void *put_image(mlx_t *mlx_st, void *img, int x, int y)
     int width;
     int height ;
 
-    width = 50;
-    height = 50;
+    width = 64;
+    height = 64;
     if (!img)
     {
         ft_printf("sprite error");
@@ -23,7 +23,7 @@ int put_sprite(mlx_t *mlx_st, char c, void* img)
     int x;
     int y;
 
-    y = 0;
+    y = 64;
 	y_b = 0;
 	if(c == 'C')
 		mlx_st->count_item = 0;
@@ -43,11 +43,11 @@ int put_sprite(mlx_t *mlx_st, char c, void* img)
 			}
 			if (c == 'C' && mlx_st->map_b[y_b][x_b] == 'C')
 				mlx_st->count_item += 1;
-            x += 50;
+            x += 64;
             x_b++;
         }
 		y_b++;
-        y += 50;
+        y += 64;
     }
     return (0);
 }

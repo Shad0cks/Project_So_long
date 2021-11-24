@@ -5,8 +5,8 @@ void set_sprite(mlx_t *mlx_st)
 	int height;
 	int width;
 
-	width = 50;
-	height = 50;
+	width = 64;
+	height = 64;
 
 	mlx_st->map_sprite->wall = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/wall.xpm", &width, &height);
 	mlx_st->map_sprite->sand = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/sand.xpm", &width, &height);
@@ -129,11 +129,12 @@ int renderer_next_frame(mlx_t *mlx_st)
 		i = 0;
 	if(y == 10000)
 		y = 0;
-	if (y % 5000 == 0)
+	if (y % 1000 == 0)
 	{
-		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->map_sprite->sand, mlx_st->player->pos_x * 50, mlx_st->player->pos_y * 50);
-		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->player->sprite_liste[i], mlx_st->player->pos_x * 50, mlx_st->player->pos_y * 50);
+		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->map_sprite->sand, mlx_st->player->pos_x * 64, mlx_st->player->pos_y * 64 + 64);
+		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->player->sprite_liste[i], mlx_st->player->pos_x * 64, mlx_st->player->pos_y * 64 + 64);
 		i++;
+
 	}
 
 	y++;
@@ -174,7 +175,7 @@ int main(void)
     mlx_st.mlx = mlx_init();
     if (mlx_st.mlx == NULL)
         exit(-1);
-	mlx_st.window = mlx_new_window(mlx_st.mlx, map.max_x * 50, map.max_y * 50, "So_long");
+	mlx_st.window = mlx_new_window(mlx_st.mlx, map.max_x * 64, (map.max_y * 64) + 64, "So_long");
 	mlx_st.map_b = buffer;
 	set_sprite(&mlx_st);
 	stock_sprite_player(&mlx_st, 6);

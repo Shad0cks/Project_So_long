@@ -37,6 +37,7 @@ typedef struct mlx_s
     void *window;
 	char **map_b;
 	int count_item;
+
     player_t *player;
     items_t *items;
 	map_sprite_t *map_sprite;
