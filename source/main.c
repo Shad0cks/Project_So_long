@@ -1,5 +1,14 @@
 #include "../include/header.h"
 
+void player_win(mlx_t *mlx_st)
+{
+	static int i = 0;
+	if (i == 9999)
+	{
+		exit_func(mlx_st);
+	}
+	i++;
+}
 void set_sprite(mlx_t *mlx_st)
 {
 	int height;
@@ -42,12 +51,7 @@ int exit_cross(int keycode, void* params)
     exit(0);
     return (0);
 }
-int no_enter(int keycode, void* params)
-{
-		(void)keycode;
-	((mlx_t *)params)->player->is_running = 0;
-    return (0);
-}
+
 int key_listen(int keycode, void* params)
 {
 	
@@ -77,19 +81,13 @@ void refresh_map(mlx_t *mlx_st)
     put_sprite(mlx_st, 'E', mlx_st->map_sprite->door);
     put_sprite(mlx_st, 'P', mlx_st->player->sprite_liste[0]);
 	number = ft_itoa(mlx_st->player->count_move);
-	string = ft_strjoin("MOVES COUNT : ", number);
-	if (mlx_st->player->count_move > 1)
-	{
-		mlx_string_put(mlx_st->mlx, mlx_st->window, 20, 20, 0x52e710, string);
-		free(number);
-		free(string);
-	}
+	if (mlx_st->player->want_exit == 0)
+		string = ft_strjoin("MOVE COUNT : ", number);
 	else
-	{
-		mlx_string_put(mlx_st->mlx, mlx_st->window, 20, 20, 0x52e710, string);
-		free(number);
-		free(string);
-	}
+		string = ft_strjoin("WIN !! \t\t\t AFTER : ", number);
+	mlx_string_put(mlx_st->mlx, mlx_st->window, 32, 32, 0x52e710, string);
+	free(number);
+	free(string);
 }
 
 void stock_sprite_player(mlx_t *mlx_st, int player_count_sprite)
@@ -103,9 +101,8 @@ void stock_sprite_player(mlx_t *mlx_st, int player_count_sprite)
 
 	i = 0;
 	mlx_st->player->sprite_liste = malloc(sizeof(void *) * 8 + 1);
-	width = 40;
-	height = 40;
-	(void)mlx_st;
+	width = 64;
+	height = 64;
 	while (i < player_count_sprite)
 	{
 		number = ft_itoa(i + 1);
@@ -122,21 +119,28 @@ void stock_sprite_player(mlx_t *mlx_st, int player_count_sprite)
 
 int renderer_next_frame(mlx_t *mlx_st)
 {
-	(void)mlx_st;
 	static int i = 0;
 	static int y = 0;
+	int reset_y;
+
+	reset_y = 0;
 	if(i == 6)
 		i = 0;
 	if(y == 10000)
 		y = 0;
-	if (y % 1000 == 0)
+	if (mlx_st->count_item == 0 && mlx_st->player->want_exit)
+	{
+		if(reset_y == 0)
+			y = 0;
+		reset_y = 1;
+		player_win(mlx_st);
+	}
+	else if (y % 1000 == 0)
 	{
 		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->map_sprite->sand, mlx_st->player->pos_x * 64, mlx_st->player->pos_y * 64 + 64);
 		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, mlx_st->player->sprite_liste[i], mlx_st->player->pos_x * 64, mlx_st->player->pos_y * 64 + 64);
 		i++;
-
 	}
-
 	y++;
 	return (0);
 }
@@ -170,6 +174,7 @@ int main(void)
         exit(-1);
     }
     mlx_t mlx_st;
+	mlx_st.map_size = &map;
 	mlx_st.map_sprite = &map_sprite;
     mlx_st.player = &player;
     mlx_st.mlx = mlx_init();

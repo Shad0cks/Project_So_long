@@ -27,7 +27,7 @@ typedef struct player_s
     int skin_width;
     int skin_height;
     int count_move;
-	int is_running;
+	int want_exit;
 	void **sprite_liste;
 } player_t;
 
@@ -37,9 +37,9 @@ typedef struct mlx_s
     void *window;
 	char **map_b;
 	int count_item;
-
     player_t *player;
     items_t *items;
+	map_t	*map_size;
 	map_sprite_t *map_sprite;
 } mlx_t;
 
