@@ -11,6 +11,14 @@ typedef struct map_s
     int max_y; 
 } map_t;
 
+typedef struct map_sprite_s
+{
+    void *sand;
+    void *wall;
+	void *item;
+	void *door; 
+} map_sprite_t;
+
 typedef struct player_s
 {
     int pos_x;
@@ -19,6 +27,8 @@ typedef struct player_s
     int skin_width;
     int skin_height;
     int count_move;
+	int is_running;
+	void **sprite_liste;
 } player_t;
 
 typedef struct mlx_s
@@ -29,15 +39,16 @@ typedef struct mlx_s
 	int count_item;
     player_t *player;
     items_t *items;
+	map_sprite_t *map_sprite;
 } mlx_t;
 
 int calc_map_size(char **buffer, map_t *map);
 int check_close(char **buffer, map_t *map);
 int valid_map(char **buffer);
 int check_piece_here(char **buffer, char c);
-void *put_image(mlx_t *mlx_st, char *imgPath, int x, int y);
+void *put_image(mlx_t *mlx_st, void *img, int x, int y);
 void exit_func(void* params);
-int put_sprite(mlx_t *mlx_st, char c, char* path, char **buffer);
+int put_sprite(mlx_t *mlx_st, char c, void* img);
 int check_all_piece(char **buffer);
 void init_player_struct(player_t *player);
 char **put_buffer();

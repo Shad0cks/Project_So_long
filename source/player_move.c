@@ -55,6 +55,7 @@ int go_up(mlx_t *mlx_st)
 			exit_func(mlx_st);
 		else if(mlx_st->map_b[mlx_st->player->pos_y - 1][mlx_st->player->pos_x] != 'E')
 		{
+			mlx_st->player->is_running = 1;
 			mlx_st->player->count_move++;
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 			mlx_st->map_b[mlx_st->player->pos_y - 1][mlx_st->player->pos_x] = 'P';
@@ -75,6 +76,7 @@ int go_down(mlx_t *mlx_st)
 			exit_func(mlx_st);
 		else if(mlx_st->map_b[mlx_st->player->pos_y + 1][mlx_st->player->pos_x] != 'E')
 		{
+			mlx_st->player->is_running = 1;
 			mlx_st->player->count_move++;
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 			mlx_st->map_b[mlx_st->player->pos_y + 1][mlx_st->player->pos_x] = 'P';
@@ -95,6 +97,7 @@ int go_left(mlx_t *mlx_st)
 			exit_func(mlx_st);
 		else if(mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x - 1] != 'E')
 		{
+			mlx_st->player->is_running = 1;
 			mlx_st->player->count_move++;
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x - 1] = 'P';
@@ -115,6 +118,7 @@ int go_right(mlx_t *mlx_st)
 			exit_func(mlx_st);
 		else if(mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x + 1] != 'E')
 		{
+			mlx_st->player->is_running = 1;
 			mlx_st->player->count_move++;
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x + 1] = 'P';
