@@ -73,8 +73,7 @@ int go_up(mlx_t *mlx_st)
 			mlx_st->map_b[mlx_st->player->pos_y - 1][mlx_st->player->pos_x] = 'P';
 		}
 	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
+	refresh_map(mlx_st);
     return (1);
 }
 
@@ -107,8 +106,7 @@ int go_down(mlx_t *mlx_st)
 			mlx_st->map_b[mlx_st->player->pos_y + 1][mlx_st->player->pos_x] = 'P';
 		}
 	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
+	refresh_map(mlx_st);
     return (1);
 }
 
@@ -141,8 +139,7 @@ int go_left(mlx_t *mlx_st)
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x - 1] = 'P';
 		}
 	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
+	refresh_map(mlx_st);
     return (1);
 }
 
@@ -175,7 +172,6 @@ int go_right(mlx_t *mlx_st)
 			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x + 1] = 'P';
 		}
 	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
+	refresh_map(mlx_st);
     return (1);
 }
