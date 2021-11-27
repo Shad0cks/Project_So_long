@@ -220,31 +220,36 @@ void check_main(char **buffer, map_t *map)
     }
 }
 
+void mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *player)
+{
+	mlx_st->map_size = map;
+	mlx_st->map_sprite = map_sprite;
+    mlx_st->player = player;
+    mlx_st->mlx = mlx_init();
+    if (mlx_st->mlx == NULL)
+        exit(-1);
+	mlx_st->window = mlx_new_window(mlx_st->mlx, map->max_x * 64, (map->max_y * 64) + 64, "So_long");
+}
+
 int main(void)
 {
     map_t map;
 	map_sprite_t map_sprite;
     player_t player;
+	mlx_t mlx_st;
 	char **buffer;
+
 	buffer = put_buffer();
     init_player_struct(&player);
     map.max_x = -1;
     map.max_y = -1;
 	check_main(buffer, &map);
-    mlx_t mlx_st;
-	mlx_st.map_size = &map;
-	mlx_st.map_sprite = &map_sprite;
-    mlx_st.player = &player;
-    mlx_st.mlx = mlx_init();
-    if (mlx_st.mlx == NULL)
-        exit(-1);
-	mlx_st.window = mlx_new_window(mlx_st.mlx, map.max_x * 64, (map.max_y * 64) + 64, "So_long");
+	mlx_init_t(&mlx_st, &map, &map_sprite, &player);
 	mlx_st.map_b = buffer;
 	set_sprite(&mlx_st);
 	stock_sprite_player(&mlx_st, 8);
 	stock_sprite_enemy(&mlx_st, 14);
 	refresh_map(&mlx_st);
-
 	mlx_hook(mlx_st.window, 2, (1L<<13), key_listen, &mlx_st);
     mlx_hook(mlx_st.window, 17, (1L<<19), exit_cross,  &mlx_st);
 	mlx_loop_hook(mlx_st.mlx, renderer_next_frame, &mlx_st);

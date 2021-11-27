@@ -52,7 +52,7 @@ int valid_map(char **buffer);
 int check_piece_here(char **buffer, char c);
 void *put_image(mlx_t *mlx_st, void *img, int x, int y);
 void exit_func(void* params);
-int put_sprite(mlx_t *mlx_st, char c, void* img);
+void put_sprite(mlx_t *mlx_st, char c, void* img);
 int check_all_piece(char **buffer);
 void init_player_struct(player_t *player);
 char **put_buffer();
