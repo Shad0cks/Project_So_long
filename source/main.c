@@ -7,6 +7,7 @@ void player_win(mlx_t *mlx_st)
 		exit_func(mlx_st);
 	i++;
 }
+
 void set_sprite(mlx_t *mlx_st)
 {
 	int height;
@@ -43,6 +44,7 @@ void exit_func(void* params)
 	free_map(mlx_st->map_b);
     exit(0);
 }
+
 int exit_cross(int keycode, void* params)
 {
 	(void)keycode;
@@ -128,9 +130,7 @@ void stock_sprite_enemy(mlx_t *mlx_st, int enemy_count_sprite)
 	int i;
 	int width;
 	int height;
-	int y;
 
-	y = 0;
 	i = enemy_count_sprite - 1;
 	mlx_st->map_sprite->fire = malloc(sizeof(void *) * enemy_count_sprite + 1);
 	width = 64;
@@ -142,10 +142,9 @@ void stock_sprite_enemy(mlx_t *mlx_st, int enemy_count_sprite)
 		free(number);
 		end = ft_strjoin(string , ".xpm");
 		free(string);
-		mlx_st->map_sprite->fire[y] = mlx_xpm_file_to_image(mlx_st->mlx, end, &width, &height);
+		mlx_st->map_sprite->fire[i] = mlx_xpm_file_to_image(mlx_st->mlx, end, &width, &height);
 		free(end);
 		i--;
-		y++;
 	}
 	mlx_st->map_sprite->fire[i] = NULL;
 }
@@ -172,7 +171,6 @@ void frame_enemy(mlx_t *mlx_st, int  index)
     }		
 }
 
-
 int renderer_next_frame(mlx_t *mlx_st)
 {
 	static int i = 0;
@@ -185,9 +183,7 @@ int renderer_next_frame(mlx_t *mlx_st)
 		i = 0;
 	if(y == 10000)
 		y = 0;
-	if (mlx_st->player->will_die == 1)
-		player_win(mlx_st);
-	else if (mlx_st->count_item == 0 && mlx_st->player->want_exit)
+	if (mlx_st->player->will_die == 1 || (mlx_st->count_item == 0 && mlx_st->player->want_exit))
 		player_win(mlx_st);
 	else if (y % 1000 == 0)
 	{
@@ -202,16 +198,8 @@ int renderer_next_frame(mlx_t *mlx_st)
 	return (0);
 }
 
-int main(void)
+void check_main(char **buffer, map_t *map)
 {
-    map_t map;
-	map_sprite_t map_sprite;
-    player_t player;
-	char **buffer;
-	buffer = put_buffer();
-    init_player_struct(&player);
-    map.max_x = -1;
-    map.max_y = -1;
 	if(!check_all_piece(buffer))
     {
         ft_printf("Error\n no valid piece in map\n");
@@ -224,12 +212,25 @@ int main(void)
 		free_map(buffer);
         exit(-1);
     }
-	if(valid_map(buffer) <= 2 || calc_map_size(buffer, &map) == -1 || check_close(buffer, &map) == -1)
+	if(valid_map(buffer) <= 2 || calc_map_size(buffer, map) == -1 || check_close(buffer, map) == -1)
     {
         ft_printf("Error\n map error\n");
 		free_map(buffer);
         exit(-1);
     }
+}
+
+int main(void)
+{
+    map_t map;
+	map_sprite_t map_sprite;
+    player_t player;
+	char **buffer;
+	buffer = put_buffer();
+    init_player_struct(&player);
+    map.max_x = -1;
+    map.max_y = -1;
+	check_main(buffer, &map);
     mlx_t mlx_st;
 	mlx_st.map_size = &map;
 	mlx_st.map_sprite = &map_sprite;

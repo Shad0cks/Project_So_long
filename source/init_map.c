@@ -9,6 +9,7 @@ int strcount(char *str)
         i++;
     return (i);
 }
+
 int valid_map(char **buffer)
 {
     int count;
