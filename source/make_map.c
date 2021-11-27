@@ -35,7 +35,12 @@ int put_sprite(mlx_t *mlx_st, char c, void* img)
         while (mlx_st->map_b[y_b][x_b] != '\0')
         {
             if (mlx_st->map_b[y_b][x_b] == c || (c == '0' && mlx_st->map_b[y_b][x_b] != '1'))
-               put_image(mlx_st, img, x, y);
+            {
+                if (c == 'N')
+                    put_image(mlx_st, img, x + 10, y);
+                else 
+                    put_image(mlx_st, img, x, y);
+            }
 			if (c == 'P' && mlx_st->map_b[y_b][x_b] == 'P')
 			{
 				mlx_st->player->pos_x = x_b;

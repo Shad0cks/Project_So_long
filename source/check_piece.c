@@ -26,7 +26,7 @@ int check_all_piece(char **buffer)
         while(buffer[y][i] != '\0')
         {
             if (buffer[y][i] != '1' && buffer[y][i] != '0' && buffer[y][i] != 'P' 
-                        && buffer[y][i] != 'C' && buffer[y][i] != 'E' && buffer[y][i] != 10)
+                        && buffer[y][i] != 'C' && buffer[y][i] != 'E' && buffer[y][i] != 10 && buffer[y][i] != 'N')
                 return (0);
             i++;
         }

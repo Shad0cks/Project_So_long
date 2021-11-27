@@ -10,5 +10,6 @@ void init_player_struct(player_t *player)
     player->skin_width = 64;
     player->player_sprite = NULL;
 	player->want_exit = 0;
+    player->will_die = 0;
 	player->sprite_liste = NULL;
 }
