@@ -17,18 +17,20 @@ typedef struct map_sprite_s
 	void *item;
 	void *door;
     void *tomb;
+    void **fire;
 } map_sprite_t;
 
 typedef struct player_s
 {
     int pos_x;
     int pos_y;
-    void *sprite;
+    void *player_sprite;
     int skin_width;
     int skin_height;
     int count_move;
 	int want_exit;
     int will_die;
+	void **sprite_liste;
 } player_t;
 
 typedef struct mlx_s

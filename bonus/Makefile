@@ -7,8 +7,6 @@ MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
 GNL_PATH		=	./libs/Get_Next_Line
 GNL				=	$(GNL_PATH)/GNL.a
 
-BONUS_PATH		=	./bonus
-
 SOURCES_FILES	=	main.c \
 					check_piece.c \
 					init_map.c \
@@ -24,7 +22,7 @@ SOURCES			=	$(addprefix $(SOURCES_DIR)/, $(SOURCES_FILES))
 
 OBJECTS			= 	$(SOURCES:.c=.o)
 
-NAME			=	so_long
+NAME			=	../so_long_bonus
 
 CC				=	clang
 RM				=	rm -f
@@ -36,9 +34,6 @@ MLXFLAGS		=	-L $(MINILIBX_PATH) -lmlx -framework OpenGL -framework AppKit
 				$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 all:			$(NAME)
-
-bonus:			
-				$(MAKE) -C $(BONUS_PATH)
 
 $(NAME):		$(LIBFT) $(GNL) $(MINILIBX) $(OBJECTS) $(HEADER)
 				$(CC) $(CFLAGS) $(OBJECTS) $(GNL) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME)
@@ -56,15 +51,13 @@ clean:
 				$(MAKE) -C $(LIBFT_PATH) clean
 				$(MAKE) -C $(GNL_PATH) clean
 				$(MAKE) -C $(MINILIBX_PATH) clean
-				$(MAKE) -C $(BONUS_PATH) clean
 				$(RM) $(OBJECTS)
 
 fclean:			clean
 				$(MAKE) -C $(LIBFT_PATH) fclean
 				$(MAKE) -C $(GNL_PATH) fclean
-				$(MAKE) -C $(BONUS_PATH) fclean
 				$(RM) $(NAME)
 
 re:				fclean all
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re libft minilibx

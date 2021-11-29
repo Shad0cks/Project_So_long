@@ -43,9 +43,9 @@ void put_sprite(mlx_t *mlx_st, char c, void* img)
             if (mlx_st->map_b[y_b][x_b] == c || (c == '0' && mlx_st->map_b[y_b][x_b] != '1'))
             {
                 if (c == 'N')
-                    put_image(mlx_st, img, x_b * 64 + 10, y_b * 64);
+                    put_image(mlx_st, img, x_b * 64 + 10, y_b * 64 + 64);
                 else 
-                    put_image(mlx_st, img, x_b * 64, y_b * 64);
+                    put_image(mlx_st, img, x_b * 64, y_b * 64 + 64);
             }
             event_map(y_b, x_b, c, mlx_st);
             x_b++;
