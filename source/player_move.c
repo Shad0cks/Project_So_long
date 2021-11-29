@@ -1,6 +1,6 @@
 #include "../include/header.h"
 
-int size_open()
+int size_open(char *path)
 {
 	char* line;
     int fd;
@@ -9,7 +9,7 @@ int size_open()
 
     line = "";
 	i = 0;
-    fd = open("map.ber", O_RDONLY);
+    fd = open(path, O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -21,7 +21,7 @@ int size_open()
     return (i);
 }
 
-char **put_buffer()
+char **put_buffer(char *path)
 {
     char  *line;
     int fd;
@@ -29,10 +29,10 @@ char **put_buffer()
     char **buffer;
 
     i = 0;
-    buffer = malloc(sizeof(char *) * (size_open() + 1));
+    buffer = malloc(sizeof(char *) * (size_open(path) + 1));
     if (!buffer)
         return (NULL);
-    fd = open("map.ber", O_RDONLY);
+    fd = open(path, O_RDONLY);
     line = "";
     while (line)
     {

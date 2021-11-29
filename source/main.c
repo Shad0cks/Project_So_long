@@ -124,7 +124,7 @@ void mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *p
 	mlx_st->window = mlx_new_window(mlx_st->mlx, map->max_x * 64, (map->max_y * 64), "So_long");
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
     map_t map;
 	map_sprite_t map_sprite;
@@ -132,7 +132,8 @@ int main(void)
 	mlx_t mlx_st;
 	char **buffer;
 
-	buffer = put_buffer();
+	(void)argc;
+	buffer = put_buffer(argv[1]);
     init_player_struct(&player);
     map.max_x = -1;
     map.max_y = -1;

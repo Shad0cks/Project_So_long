@@ -54,7 +54,7 @@ void exit_func(void* params);
 void put_sprite(mlx_t *mlx_st, char c, void* img);
 int check_all_piece(char **buffer);
 void init_player_struct(player_t *player);
-char **put_buffer();
+char **put_buffer(char *path);
 void refresh_map(mlx_t *mlx_st);
 int go_up(mlx_t *mlx_st);
 int go_down(mlx_t *mlx_st);
