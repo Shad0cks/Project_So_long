@@ -16,11 +16,11 @@ void set_sprite(mlx_t *mlx_st)
 	width = 64;
 	height = 64;
 
-	mlx_st->map_sprite->wall = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/wall.xpm", &width, &height);
-	mlx_st->map_sprite->sand = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/sand.xpm", &width, &height);
-	mlx_st->map_sprite->item = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/item.xpm", &width, &height);
-	mlx_st->map_sprite->door = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/door.xpm", &width, &height);
-	mlx_st->map_sprite->tomb = mlx_xpm_file_to_image(mlx_st->mlx, "../sprite/tomb.xpm", &width, &height);
+	mlx_st->map_sprite->wall = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/wall.xpm", &width, &height);
+	mlx_st->map_sprite->sand = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/sand.xpm", &width, &height);
+	mlx_st->map_sprite->item = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/item.xpm", &width, &height);
+	mlx_st->map_sprite->door = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/door.xpm", &width, &height);
+	mlx_st->map_sprite->tomb = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/tomb.xpm", &width, &height);
 }
 
 void free_map(char **buffer)
@@ -111,7 +111,7 @@ void stock_sprite_player(mlx_t *mlx_st, int player_count_sprite)
 	while (i < player_count_sprite)
 	{
 		number = ft_itoa(i + 1);
-		string = ft_strjoin("../sprite/player/player", number);
+		string = ft_strjoin("sprite/player/player", number);
 		free(number);
 		end = ft_strjoin(string , ".xpm");
 		free(string);
@@ -138,7 +138,7 @@ void stock_sprite_enemy(mlx_t *mlx_st, int enemy_count_sprite)
 	while (i >= 0)
 	{
 		number = ft_itoa(i + 1);
-		string = ft_strjoin("../sprite/fire/fire", number);
+		string = ft_strjoin("sprite/fire/fire", number);
 		free(number);
 		end = ft_strjoin(string , ".xpm");
 		free(string);
@@ -202,19 +202,19 @@ void check_main(char **buffer, map_t *map)
 {
 	if(!check_all_piece(buffer))
     {
-        ft_printf("Error\n no valid piece in map\n");
+        printf("Error\n no valid piece in map\n");
         free_map(buffer);
 		exit(-1);
     }
     if (!check_piece_here(buffer, 'P') || !check_piece_here(buffer, 'E') || !check_piece_here(buffer, 'C'))
     {
-        ft_printf("Error\n map piece error\n");
+        printf("Error\n map piece error\n");
 		free_map(buffer);
         exit(-1);
     }
 	if(valid_map(buffer) <= 2 || calc_map_size(buffer, map) == -1 || check_close(buffer, map) == -1)
     {
-        ft_printf("Error\n map error\n");
+        printf("Error\n map error\n");
 		free_map(buffer);
         exit(-1);
     }

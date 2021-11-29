@@ -2,7 +2,6 @@
 
 void init_player_struct(player_t *player)
 {
-	
     player->count_move = 0;
     player->pos_x = 0;
     player->pos_y = 0;

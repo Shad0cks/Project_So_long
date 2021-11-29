@@ -9,7 +9,7 @@ void *put_image(mlx_t *mlx_st, void *img, int x, int y)
     height = 64;
     if (!img)
     {
-        ft_printf("sprite error");
+        printf("sprite error");
         exit_func(&mlx_st);
     }
 	mlx_put_image_to_window(mlx_st->mlx, mlx_st->window, img, x, y);

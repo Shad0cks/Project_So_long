@@ -1,9 +1,8 @@
-#include "../minilibx/mlx.h"
+#include "../libs/minilibx/mlx.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "../libft/libft.h"
-#include "../ft_printf/includes/ft_printf.h"
-#include "../Get_Next_Line/get_next_line.h"
+#include "../libs/libft/libft.h"
+#include "../libs/Get_Next_Line/get_next_line.h"
 
 typedef struct map_s
 {

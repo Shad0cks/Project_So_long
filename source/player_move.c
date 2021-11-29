@@ -9,7 +9,7 @@ int size_open()
 
     line = "";
 	i = 0;
-    fd = open("../map.ber", O_RDONLY);
+    fd = open("map.ber", O_RDONLY);
     while (line)
     {
         line = get_next_line(fd);
@@ -32,7 +32,7 @@ char **put_buffer()
     buffer = malloc(sizeof(char *) * (size_open() + 1));
     if (!buffer)
         return (NULL);
-    fd = open("../map.ber", O_RDONLY);
+    fd = open("map.ber", O_RDONLY);
     line = "";
     while (line)
     {
