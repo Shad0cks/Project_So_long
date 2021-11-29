@@ -20,7 +20,6 @@ void set_sprite(mlx_t *mlx_st)
 	mlx_st->map_sprite->sand = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/sand.xpm", &width, &height);
 	mlx_st->map_sprite->item = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/item.xpm", &width, &height);
 	mlx_st->map_sprite->door = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/door.xpm", &width, &height);
-	mlx_st->map_sprite->tomb = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/tomb.xpm", &width, &height);
 	mlx_st->player->sprite = mlx_xpm_file_to_image(mlx_st->mlx, "sprite/player.xpm", &width, &height);
 
 }

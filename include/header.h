@@ -16,7 +16,6 @@ typedef struct map_sprite_s
     void *wall;
 	void *item;
 	void *door;
-    void *tomb;
 } map_sprite_t;
 
 typedef struct player_s

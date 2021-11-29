@@ -40,7 +40,7 @@ void put_sprite(mlx_t *mlx_st, char c, void* img)
         x_b = 0;
         while (mlx_st->map_b[y_b][x_b] != '\0')
         {
-            if (mlx_st->map_b[y_b][x_b] == c || (c == '0' && mlx_st->map_b[y_b][x_b] != '1'))
+            if (mlx_st->map_b[y_b][x_b] == c || (c == '0'))
             {
                 if (c == 'N')
                     put_image(mlx_st, img, x_b * 64 + 10, y_b * 64);

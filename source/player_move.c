@@ -64,7 +64,6 @@ void cond2(mlx_t *mlx_st, int x , int y)
 		mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 		mlx_st->player->will_die = 1;
 		refresh_map(mlx_st);
-		put_image(mlx_st, mlx_st->map_sprite->tomb, mlx_st->player->pos_x * 64, mlx_st->player->pos_y * 64 + 18);
 	}
 	else if(mlx_st->map_b[y][x] != 'E')
 	{
