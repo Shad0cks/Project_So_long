@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 16:12:23 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/11/05 18:16:41 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:07:05 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strdup(char *src)
 {
 	char	*cped;
-	int	i;
+	int		i;
 
 	cped = malloc(sizeof(char) * (ft_strlen(src) + 1));
 	if (cped == NULL)

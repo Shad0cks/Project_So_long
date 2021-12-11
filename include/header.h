@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:25:13 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 05:27:45 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:43:27 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 # include "../libs/libft/libft.h"
 # include "../libs/Get_Next_Line/get_next_line.h"
 
-typedef struct map_s
+typedef struct s_map
 {
 	int	max_x;
 	int	max_y;
-}	map_t;
+}	t_map;
 
-typedef struct map_sprite_s
+typedef struct s_map_sprite
 {
 	void	*sand;
 	void	*wall;
 	void	*item;
 	void	*door;
-}	map_sprite_t;
+}	t_map_sprite;
 
-typedef struct player_s
+typedef struct s_player
 {
 	int		pos_x;
 	int		pos_y;
@@ -43,33 +43,41 @@ typedef struct player_s
 	int		count_move;
 	int		want_exit;
 	int		will_die;
-}		player_t;
+}		t_player;
 
-typedef struct mlx_s
+typedef struct s_mlx
 {
 	void			*mlx;
 	void			*window;
 	char			**map_b;
 	int				count_item;
-	player_t		*player;
+	t_player		*player;
 	items_t			*items;
-	map_t			*map_size;
-	map_sprite_t	*map_sprite;
-}		mlx_t;
+	t_map			*map_size;
+	t_map_sprite	*map_sprite;
+}		t_mlx;
 
-int		calc_map_size(char **buffer, map_t *map);
-int		check_close(char **buffer, map_t *map);
+char	**put_buffer(char *path);
+int		calc_map_size(char **buffer, t_map *map);
+int		check_close(char **buffer, t_map *map);
 int		valid_map(char **buffer);
 int		check_piece_here(char **buffer, char c);
-void	*put_image(mlx_t *mlx_st, void *img, int x, int y);
+void	*put_image(t_mlx *mlx_st, void *img, int x, int y);
 void	exit_func(void *params);
-void	put_sprite(mlx_t *mlx_st, char c, void *img);
+void	put_sprite(t_mlx *mlx_st, char c, void *img);
 int		check_all_piece(char **buffer);
-void	init_player_struct(player_t *player);
-char	**put_buffer(char *path);
-void	refresh_map(mlx_t *mlx_st);
-int		go_up(mlx_t *mlx_st);
-int		go_down(mlx_t *mlx_st);
-int		go_left(mlx_t *mlx_st);
-int		go_right(mlx_t *mlx_st);
+void	init_player_struct(t_player *player);
+void	refresh_map(t_mlx *mlx_st);
+void	cond1(t_mlx *mlx_st, int x, int y);
+void	cond2(t_mlx *mlx_st, int x, int y);
+int		go_up(t_mlx *mlx_st);
+int		go_down(t_mlx *mlx_st);
+int		go_left(t_mlx *mlx_st);
+int		go_right(t_mlx *mlx_st);
+void	player_win(t_mlx *mlx_st);
+void	set_sprite(t_mlx *mlx_st);
+void	free_map(char **buffer);
+void	exit_func(void *params);
+int		exit_cross(int keycode, void *params);
+int		check_all_piece(char **buffer);
 #endif

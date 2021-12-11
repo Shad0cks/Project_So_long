@@ -14,7 +14,10 @@ SOURCES_FILES	=	main.c \
 					init_map.c \
 					init_player.c \
 					make_map.c \
-					player_move.c 
+					player_move.c \
+					player_move2.c \
+					exit.c
+
 
 SOURCES_DIR		=	source
 

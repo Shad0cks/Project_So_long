@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:41:37 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 05:43:37 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:40:31 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**put_buffer(char *path)
 	return (buffer);
 }
 
-void	cond1(mlx_t *mlx_st, int x, int y)
+void	cond1(t_mlx *mlx_st, int x, int y)
 {
 	if (mlx_st->map_b[y][x] == 'C')
 		mlx_st->count_item--;
@@ -67,7 +67,7 @@ void	cond1(mlx_t *mlx_st, int x, int y)
 	}
 }
 
-void	cond2(mlx_t *mlx_st, int x, int y)
+void	cond2(t_mlx *mlx_st, int x, int y)
 {
 	if (mlx_st->map_b[y][x] == 'N')
 	{
@@ -82,64 +82,4 @@ void	cond2(mlx_t *mlx_st, int x, int y)
 		mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x] = '0';
 		mlx_st->map_b[y][x] = 'P';
 	}
-}
-
-int	go_up(mlx_t *mlx_st)
-{
-	mlx_clear_window(mlx_st->mlx, mlx_st->window);
-	if (mlx_st->map_b[mlx_st->player->pos_y - 1][mlx_st->player->pos_x] &&
-			mlx_st->map_b[mlx_st->player->pos_y - 1][mlx_st->player->pos_x]
-			!= '1')
-	{
-		cond1(mlx_st, mlx_st->player->pos_x, mlx_st->player->pos_y - 1);
-		cond2(mlx_st, mlx_st->player->pos_x, mlx_st->player->pos_y - 1);
-	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
-	return (1);
-}
-
-int	go_down(mlx_t *mlx_st)
-{
-	mlx_clear_window(mlx_st->mlx, mlx_st->window);
-	if (mlx_st->map_b[mlx_st->player->pos_y + 1][mlx_st->player->pos_x] &&
-			mlx_st->map_b[mlx_st->player->pos_y + 1][mlx_st->player->pos_x]
-			!= '1')
-	{
-		cond1(mlx_st, mlx_st->player->pos_x, mlx_st->player->pos_y + 1);
-		cond2(mlx_st, mlx_st->player->pos_x, mlx_st->player->pos_y + 1);
-	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
-	return (1);
-}
-
-int	go_left(mlx_t *mlx_st)
-{
-	mlx_clear_window(mlx_st->mlx, mlx_st->window);
-	if (mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x - 1] &&
-			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x - 1]
-			!= '1')
-	{
-		cond1(mlx_st, mlx_st->player->pos_x - 1, mlx_st->player->pos_y);
-		cond2(mlx_st, mlx_st->player->pos_x - 1, mlx_st->player->pos_y);
-	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
-	return (1);
-}
-
-int	go_right(mlx_t *mlx_st)
-{
-	mlx_clear_window(mlx_st->mlx, mlx_st->window);
-	if (mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x + 1] &&
-			mlx_st->map_b[mlx_st->player->pos_y][mlx_st->player->pos_x + 1]
-			!= '1')
-	{
-		cond1(mlx_st, mlx_st->player->pos_x + 1, mlx_st->player->pos_y);
-		cond2(mlx_st, mlx_st->player->pos_x + 1, mlx_st->player->pos_y);
-	}
-	if (mlx_st->player->will_die == 0)
-		refresh_map(mlx_st);
-	return (1);
 }

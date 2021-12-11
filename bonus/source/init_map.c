@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:55:14 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 05:56:00 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:39:29 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	valid_map(char **buffer)
 	return (count);
 }
 
-int	calc_map_size(char **buffer, map_t *map)
+int	calc_map_size(char **buffer, t_map *map)
 {
 	int	count;
 	int	y;
@@ -73,7 +73,7 @@ static int	check_full_wall(char *str)
 	return (0);
 }
 
-int	check_close(char **buffer, map_t *map)
+int	check_close(char **buffer, t_map *map)
 {
 	int	y;
 

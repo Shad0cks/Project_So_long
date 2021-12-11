@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:40:50 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 05:40:50 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:40:31 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-void	*put_image(mlx_t *mlx_st, void *img, int x, int y)
+void	refresh_map(t_mlx *mlx_st)
+{	
+	put_sprite(mlx_st, '0', mlx_st->map_sprite->sand);
+	put_sprite(mlx_st, '1', mlx_st->map_sprite->wall);
+	put_sprite(mlx_st, 'C', mlx_st->map_sprite->item);
+	put_sprite(mlx_st, 'E', mlx_st->map_sprite->door);
+	put_sprite(mlx_st, 'P', mlx_st->player->sprite);
+	printf("Player move : %d\n", mlx_st->player->count_move);
+}
+
+void	*put_image(t_mlx *mlx_st, void *img, int x, int y)
 {
 	int	width;
 	int	height ;
@@ -28,7 +38,7 @@ void	*put_image(mlx_t *mlx_st, void *img, int x, int y)
 	return (NULL);
 }
 
-void	event_map(int y_b, int x_b, char c, mlx_t *mlx_st)
+void	event_map(int y_b, int x_b, char c, t_mlx *mlx_st)
 {
 	if (c == 'P' && mlx_st->map_b[y_b][x_b] == 'P')
 	{
@@ -39,7 +49,7 @@ void	event_map(int y_b, int x_b, char c, mlx_t *mlx_st)
 		mlx_st->count_item += 1;
 }
 
-void	put_sprite(mlx_t *mlx_st, char c, void *img)
+void	put_sprite(t_mlx *mlx_st, char c, void *img)
 {
 	int	x_b;
 	int	y_b;

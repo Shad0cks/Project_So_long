@@ -3,25 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:56:38 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 06:04:01 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:40:31 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-void	player_win(mlx_t *mlx_st)
-{
-	static int	i = 0;
-
-	if (i == 9999)
-		exit_func(mlx_st);
-	i++;
-}
-
-void	set_sprite(mlx_t *mlx_st)
+void	set_sprite(t_mlx *mlx_st)
 {
 	int	height;
 	int	width;
@@ -40,37 +31,7 @@ void	set_sprite(mlx_t *mlx_st)
 			"bonus/sprite/tomb.xpm", &width, &height);
 }
 
-void	free_map(char **buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i] != NULL)
-	{
-		free(buffer[i]);
-		i++;
-	}
-	free(buffer[i]);
-}
-
-void	exit_func(void *params)
-{
-	mlx_t	*mlx_st;
-
-	mlx_st = (mlx_t *)params;
-	free_map(mlx_st->map_b);
-	exit(0);
-}
-
-int	exit_cross(int keycode, void *params)
-{
-	(void)keycode;
-	(void)params;
-	exit(0);
-	return (0);
-}
-
-int	key_listen(int keycode, mlx_t *params)
+int	key_listen(int keycode, t_mlx *params)
 {
 	if (params->player->will_die == 1 || params->player->want_exit == 1)
 		return (0);
@@ -87,143 +48,7 @@ int	key_listen(int keycode, mlx_t *params)
 	return (0);
 }
 
-void	refresh_map(mlx_t *mlx_st)
-{
-	char	*number;
-	char	*string;
-
-	put_sprite(mlx_st, '0', mlx_st->map_sprite->sand);
-	put_sprite(mlx_st, '1', mlx_st->map_sprite->wall);
-	put_sprite(mlx_st, 'C', mlx_st->map_sprite->item);
-	put_sprite(mlx_st, 'E', mlx_st->map_sprite->door);
-	put_sprite(mlx_st, 'P', mlx_st->player->sprite_liste[0]);
-	put_sprite(mlx_st, 'N', mlx_st->map_sprite->fire[6]);
-	number = ft_itoa(mlx_st->player->count_move);
-	if (mlx_st->player->will_die == 1)
-		string = ft_strjoin("LOSE !! \t\t\t Player die in ", number);
-	else if (mlx_st->player->want_exit == 0)
-		string = ft_strjoin("MOVE COUNT : ", number);
-	else
-		string = ft_strjoin("WIN !! \t\t\t AFTER : ", number);
-	mlx_string_put(mlx_st->mlx, mlx_st->window, 32, 32, 0x52e710, string);
-	free(number);
-	free(string);
-}
-
-void	stock_sprite_player(mlx_t *mlx_st, int player_count_sprite)
-{
-	char	*number;
-	char	*string;
-	char	*end;
-	int		i;
-	int		width;
-	int		height;
-
-	i = 0;
-	mlx_st->player->sprite_liste = malloc(sizeof(void *)
-			* player_count_sprite + 1);
-	width = 64;
-	height = 64;
-	while (i < player_count_sprite)
-	{
-		number = ft_itoa(i + 1);
-		string = ft_strjoin("bonus/sprite/player/player", number);
-		free(number);
-		end = ft_strjoin(string, ".xpm");
-		free(string);
-		mlx_st->player->sprite_liste[i] = mlx_xpm_file_to_image(mlx_st->mlx,
-				end, &width, &height);
-		free(end);
-		i++;
-	}
-	mlx_st->player->sprite_liste[i] = NULL;
-}
-
-void	stock_sprite_enemy(mlx_t *mlx_st, int enemy_count_sprite)
-{
-	char	*number;
-	char	*string;
-	char	*end;
-	int		i;
-	int		width;
-	int		height;
-
-	i = enemy_count_sprite - 1;
-	mlx_st->map_sprite->fire = malloc(sizeof(void *) * enemy_count_sprite + 1);
-	width = 64;
-	height = 64;
-	while (i >= 0)
-	{
-		number = ft_itoa(i + 1);
-		string = ft_strjoin("bonus/sprite/fire/fire", number);
-		free(number);
-		end = ft_strjoin(string, ".xpm");
-		free(string);
-		mlx_st->map_sprite->fire[i] = mlx_xpm_file_to_image(mlx_st->mlx,
-				end, &width, &height);
-		free(end);
-		i--;
-	}
-	mlx_st->map_sprite->fire[i] = NULL;
-}
-
-void	frame_enemy(mlx_t *mlx_st, int index)
-{
-	int	i;
-	int	y;
-
-	y = 0;
-	while (mlx_st->map_b[y] != NULL)
-	{
-		i = 0;
-		while (mlx_st->map_b[y][i] != '\0')
-		{
-			if (mlx_st->map_b[y][i] == 'N')
-			{
-				mlx_put_image_to_window(mlx_st->mlx, mlx_st->window,
-					mlx_st->map_sprite->sand, i * 64, y * 64 + 64);
-				mlx_put_image_to_window(mlx_st->mlx, mlx_st->window,
-					mlx_st->map_sprite->fire[index], i * 64 + 10, y * 64 + 64);
-			}
-			i++;
-		}
-		y++;
-	}		
-}
-
-int	renderer_next_frame(mlx_t *mlx_st)
-{
-	static int	i = 0;
-	static int	y = 0;
-	static int	int_enemy = 0;
-
-	if (int_enemy == 14)
-		int_enemy = 0;
-	if (i == 8)
-		i = 0;
-	if (y == 10000)
-		y = 0;
-	if (mlx_st->player->will_die == 1 || (mlx_st->count_item == 0
-			&& mlx_st->player->want_exit))
-		player_win(mlx_st);
-	else if (y % 1000 == 0)
-	{
-		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window,
-			mlx_st->map_sprite->sand, mlx_st->player->pos_x * 64,
-			mlx_st->player->pos_y * 64 + 64);
-		mlx_put_image_to_window(mlx_st->mlx, mlx_st->window,
-			mlx_st->player->sprite_liste[i], mlx_st->player->pos_x * 64,
-			mlx_st->player->pos_y * 64 + 64);
-		if (y % 2000 == 0)
-			frame_enemy(mlx_st, int_enemy);
-		i++;
-	}
-	y++;
-	int_enemy++;
-	return (0);
-}
-
-void	check_main(char **buffer, map_t *map)
+void	check_main(char **buffer, t_map *map)
 {
 	if (!check_all_piece(buffer))
 	{
@@ -247,7 +72,8 @@ void	check_main(char **buffer, map_t *map)
 	}
 }
 
-void	mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *player)
+void	mlx_init_t(t_mlx *mlx_st, t_map *map,
+		t_map_sprite *map_sprite, t_player *player)
 {
 	mlx_st->map_size = map;
 	mlx_st->map_sprite = map_sprite;
@@ -261,10 +87,10 @@ void	mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *p
 
 int	main(int argc, char *argv[])
 {
-	map_t			map;
-	map_sprite_t	map_sprite;
-	player_t		player;
-	mlx_t			mlx_st;
+	t_map			map;
+	t_map_sprite	map_sprite;
+	t_player		player;
+	t_mlx			mlx_st;
 	char			**buffer;
 
 	(void)argc;

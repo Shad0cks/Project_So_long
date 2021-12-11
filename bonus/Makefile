@@ -7,12 +7,15 @@ MINILIBX		=	$(MINILIBX_PATH)/libmlx.a
 GNL_PATH		=	./libs/Get_Next_Line
 GNL				=	$(GNL_PATH)/GNL.a
 
-SOURCES_FILES	=	main.c \
-					check_piece.c \
-					init_map.c \
-					init_player.c \
-					make_map.c \
-					player_move.c 
+SOURCES_FILES	=	main.c 			\
+					check_piece.c 	\
+					init_map.c 		\
+					init_player.c 	\
+					make_map.c 		\
+					player_move.c 	\
+					player_move2.c 	\
+					exit.c			\
+					frame.c
 
 SOURCES_DIR		=	source
 

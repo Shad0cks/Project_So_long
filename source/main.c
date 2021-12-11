@@ -3,74 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:35:50 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/10 05:44:08 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 02:40:31 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-void	player_win(mlx_t *mlx_st)
-{
-	static int	i = 0;
-
-	if (i == 9999)
-		exit_func(mlx_st);
-	i++;
-}
-
-void	set_sprite(mlx_t *mlx_st)
-{
-	int	height;
-	int	width;
-
-	width = 64;
-	height = 64;
-	mlx_st->map_sprite->wall = mlx_xpm_file_to_image(mlx_st->mlx,
-			"sprite/wall.xpm", &width, &height);
-	mlx_st->map_sprite->sand = mlx_xpm_file_to_image(mlx_st->mlx,
-			"sprite/sand.xpm", &width, &height);
-	mlx_st->map_sprite->item = mlx_xpm_file_to_image(mlx_st->mlx,
-			"sprite/item.xpm", &width, &height);
-	mlx_st->map_sprite->door = mlx_xpm_file_to_image(mlx_st->mlx,
-			"sprite/door.xpm", &width, &height);
-	mlx_st->player->sprite = mlx_xpm_file_to_image(mlx_st->mlx,
-			"sprite/player.xpm", &width, &height);
-}
-
-void	free_map(char **buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i] != NULL)
-	{
-		free(buffer[i]);
-		i++;
-	}
-	free(buffer[i]);
-}
-
-void	exit_func(void *params)
-{
-	mlx_t	*mlx_st;
-
-	mlx_st = (mlx_t *)params;
-	free_map(mlx_st->map_b);
-	exit(0);
-}
-
-int	exit_cross(int keycode, void* params)
-{
-	(void)keycode;
-	(void)params;
-	exit(0);
-	return (0);
-}
-
-int	key_listen(int keycode, mlx_t* params)
+int	key_listen(int keycode, t_mlx *params)
 {
 	if (params->player->will_die == 1 || params->player->want_exit == 1)
 		return (0);
@@ -87,17 +29,7 @@ int	key_listen(int keycode, mlx_t* params)
 	return (0);
 }
 
-void	refresh_map(mlx_t *mlx_st)
-{	
-	put_sprite(mlx_st, '0', mlx_st->map_sprite->sand);
-	put_sprite(mlx_st, '1', mlx_st->map_sprite->wall);
-	put_sprite(mlx_st, 'C', mlx_st->map_sprite->item);
-	put_sprite(mlx_st, 'E', mlx_st->map_sprite->door);
-	put_sprite(mlx_st, 'P', mlx_st->player->sprite);
-	printf("Player move : %d\n", mlx_st->player->count_move);
-}
-
-int	renderer_next_frame(mlx_t *mlx_st)
+int	renderer_next_frame(t_mlx *mlx_st)
 {
 	if (mlx_st->player->will_die == 1 || (mlx_st->count_item == 0
 			&& mlx_st->player->want_exit))
@@ -105,7 +37,7 @@ int	renderer_next_frame(mlx_t *mlx_st)
 	return (0);
 }
 
-void	check_main(char **buffer, map_t *map)
+void	check_main(char **buffer, t_map *map)
 {
 	if (!check_all_piece(buffer))
 	{
@@ -129,7 +61,8 @@ void	check_main(char **buffer, map_t *map)
 	}
 }
 
-void	mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *player)
+void	mlx_init_t(t_mlx *mlx_st, t_map *map,
+		t_map_sprite *map_sprite, t_player *player)
 {
 	mlx_st->map_size = map;
 	mlx_st->map_sprite = map_sprite;
@@ -143,10 +76,10 @@ void	mlx_init_t(mlx_t *mlx_st, map_t *map, map_sprite_t *map_sprite, player_t *p
 
 int	main(int argc, char *argv[])
 {
-	map_t			map;
-	map_sprite_t	map_sprite;
-	player_t		player;
-	mlx_t			mlx_st;
+	t_map			map;
+	t_map_sprite	map_sprite;
+	t_player		player;
+	t_mlx			mlx_st;
 	char			**buffer;
 
 	(void)argc;
