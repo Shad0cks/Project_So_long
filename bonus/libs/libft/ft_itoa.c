@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdeshaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 14:37:45 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/11/05 18:16:12 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:41:14 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	int_count(int nb)
 	int	count;
 
 	count = 0;
-	if (nb < 0 )
+	if (nb < 0)
 		count++;
 	while (nb / 10)
 	{

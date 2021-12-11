@@ -6,7 +6,7 @@
 /*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 05:50:09 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/11 02:50:39 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:43:57 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_mlx
 	char			**map_b;
 	int				count_item;
 	t_player		*player;
-	items_t			*items;
 	t_map			*map_size;
 	t_map_sprite	*map_sprite;
 }	t_mlx;

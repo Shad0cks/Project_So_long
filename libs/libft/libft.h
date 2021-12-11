@@ -6,7 +6,7 @@
 /*   By: pdeshaye <pdeshaye@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 15:03:16 by pdeshaye          #+#    #+#             */
-/*   Updated: 2021/12/11 02:06:25 by pdeshaye         ###   ########.fr       */
+/*   Updated: 2021/12/11 16:39:42 by pdeshaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-
-typedef struct items_s items_t;
-struct  items_s
-{
-    int index;
-    void *sprite; 
-    items_t *next; 
-};
 
 typedef struct s_list
 {
